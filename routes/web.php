@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/publicar', function(){
+    return view('publicar');
+});
+
 Auth::routes();
 
 Route::post('criar_postagem', 'PostagensController@store');
