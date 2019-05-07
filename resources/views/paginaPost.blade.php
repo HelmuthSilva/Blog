@@ -1,22 +1,21 @@
 @extends('layouts.layout')
 
-
 @navegar()
 
 @endnavegar
 
 
-@foreach($postagens as $pubs)
-    @postagens([
+@postagemCompleta([
         'titulo' => '{{$pubs->titulo}}', 
         'descricao' =>'{{$pubs->descricao}}',
         'nome' => '{{$pubs->autor}}',
-        'dia' => '{{$pubs->dia}}',
-        'id' => '{{$pubs->id}}'])
+        'data' => '{{$pubs->dia}}',
+        'texto' => '{{$pubs->texto}}'])
 
-        
-    @endpostagens
-@endforeach
+
+
+@endpostagemCompleta
+
 
 @rodape()
 

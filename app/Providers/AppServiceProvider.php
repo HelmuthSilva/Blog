@@ -30,5 +30,6 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('components.rodape', 'rodape');
         Blade::component('components.apresentacao', 'apresentacao');
         Blade::component('components.postagens', 'postagens');
+        Blade::component('components.pagPost', 'postagemCompleta');
     }
 }

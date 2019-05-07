@@ -17,7 +17,8 @@
         <hr>
         <!-- Pager -->
         <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Postagens antigas &rarr;</a>
+          <a class="btn btn-danger" href="/excluir_postagem/{{$id}}">Excluir Postagem</a>
+          <a class="btn btn-warning" href="editar_postagem/{{$id}}">Editar Postagem</a>
         </div>
       </div>
     </div>
