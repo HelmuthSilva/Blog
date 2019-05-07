@@ -20,7 +20,9 @@ class PostagensController extends Controller
 
     public function index()
     {
-        //
+        $id = Auth::id();
+        $postagens = DB::table('postagens')->where('usuario', '$id')->get();
+        return view ('postUsuario',['postagem'=> $postagens]);
     }
 
     /**
@@ -30,7 +32,6 @@ class PostagensController extends Controller
      */
     public function create()
     {
-        // 
     }
 
     /**
@@ -50,7 +51,7 @@ class PostagensController extends Controller
         $postagens->imagem = Storage::putFile('iPostagens', $request->file('imagem'));
         $postagens->save();
 
-        return redirect('/home')->with('message', 'Post criado com sucesso!');
+        return redirect('/')->with('message', 'Post criado com sucesso!');
     }
 
     /**
@@ -61,7 +62,7 @@ class PostagensController extends Controller
      */
     public function show(Postagens $postagens)
     {
-        return view('postUsuario',compact('postagens',$postagens));
+        return view('',compact('postagens',$postagens));
     }
 
     /**
@@ -73,7 +74,7 @@ class PostagensController extends Controller
     public function edit($id)
     {
         $postagens = Postagens::find($id);
-        return view('', ['postagem'=> $postagens]);
+        return view('editarPost', ['postagem'=> $postagens]);
     }
 
     /**
@@ -91,11 +92,10 @@ class PostagensController extends Controller
         $postagens->nomePost = $request->input('nome_postagem');
         $postagens->texto = $request->input('texto_post');
         $postagens->descricao = $request->input('descricao_post');
-        $postagens->usuario = Auth::id();
         $postagens->imagem = Storage::putFile('iPostagens', $request->file('imagem'));
         $postagens->save();
         }
-        return view('')->with('message','Post atualizado com sucesso!');
+        return view('postUsuario')->with('message','Post atualizado com sucesso!');
     }
 
     /**

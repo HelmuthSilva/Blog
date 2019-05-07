@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
 
     {
-        $postagens = Postagens::all();
-        return view('home', compact('postagens'));
+        $postagens = Postagens::orderBy('created_at','desc');
+        return view('/', compact('postagens'));
     }
 }

@@ -37,7 +37,7 @@ class ComentariosController extends Controller
     public function store(Request $request,$id)
     {
         $comentarios = new Comentarios();
-        $comentarios->texto_comentario=$request->input('comentario');
+        $comentarios->texto_comentario = $request->input('comentario');
         $comentarios->nome_usuario=Auth::user()->name;
         $comentarios->postagem = $id;
         $comentarios->save();
@@ -64,7 +64,8 @@ class ComentariosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $comentarios = Comentarios::find($id);
+        return view('', ['comentario => $comentarios']);
     }
 
     /**
@@ -76,7 +77,13 @@ class ComentariosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $comentarios = Comentarios::find($id);
+
+        if(isset($comentarios)){
+        $postagens->texto_comentario = $request->input('comentario');
+        $postagens->save();
+        }
+        return view('')->with('message','Post atualizado com sucesso!');
     }
 
     /**
