@@ -8,10 +8,10 @@
 
 @foreach($postagens as $pubs)
     @postagens([
-        'titulo' => '{{$pubs->titulo}}', 
-        'descricao' =>'{{$pubs->descricao}}',
-        'nome' => '{{$pubs->autor}}'',
-        'dia' => '{{$pubs->dia}}'])
+        'titulo' => '{{$postagens->titulo}}', 
+        'descricao' =>'{{$postagens->descricao}}',
+        'nome' => '{{$postagens->autor}}'',
+        'dia' => '{{$postagens->dia}}'])
 
         
     @endpostagens

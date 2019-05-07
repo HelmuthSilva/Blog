@@ -23,3 +23,16 @@ Auth::routes();
 
 Route::post('criar_postagem', 'PostagensController@store');
 Route::get('/home', 'HomeController@index')->name('home');
+//Rotas de postagem
+Route::post('criar_postagem', 'PostagensController@store');
+Route::get('/ver_post/{id}', 'PostagensController@show');
+Route::get('/excluir_postagem/{id}', 'PostagensController@destroy');
+Route::get('editar_postagem/{id}', 'PostagensController@edit');
+Route::post('/update_postagem/{id}', 'PostagensController@update');
+
+//Rotas de comentários
+Route::post('criar_comentario/{id}', 'ComentariosController@store');
+Route::get('/post_comentario/{id}', 'ComentariosController@show');
+Route::get('/excluir_comentario{id}', 'ComentariosController@destroy');
+Route::get('/editar_comentario{id}', 'ComentariosController@edit');
+Route::post('update_comentario/{id}', 'ComentariosController@update');

@@ -48,7 +48,7 @@ class PostagensController extends Controller
         $postagens->descricao = $request->input('descricao_post');
         $postagens->usuario = Auth::id();
         $postagens->imagem = Storage::putFile('iPostagens', $request->file('imagem'));
-        $postagem->save();
+        $postagens->save();
 
         return redirect('/home')->with('message', 'Post criado com sucesso!');
     }
@@ -56,12 +56,12 @@ class PostagensController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Postagens $postagem
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Postagens $postagens)
     {
-        //
+        return view('postUsuario',compact('postagens',$postagens));
     }
 
     /**
@@ -72,7 +72,8 @@ class PostagensController extends Controller
      */
     public function edit($id)
     {
-        //
+        $postagens = Postagens::find($id);
+        return view('', ['postagem'=> $postagens]);
     }
 
     /**
@@ -84,7 +85,17 @@ class PostagensController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $postagens = Postagens::find($id);
+
+        if(isset($postagens)){
+        $postagens->nomePost = $request->input('nome_postagem');
+        $postagens->texto = $request->input('texto_post');
+        $postagens->descricao = $request->input('descricao_post');
+        $postagens->usuario = Auth::id();
+        $postagens->imagem = Storage::putFile('iPostagens', $request->file('imagem'));
+        $postagens->save();
+        }
+        return view('')->with('message','Post atualizado com sucesso!');
     }
 
     /**
@@ -95,6 +106,13 @@ class PostagensController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $postagens = Postagens::find($id);
+
+        DB::table('comentarios')->where('postagem',$id)->delete();
+
+        if(isset($postagens)){
+            $postagens->delete();
+        }
+        return redirect('/');
     }
 }
