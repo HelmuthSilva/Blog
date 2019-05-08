@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Postagens;
+use App\User;
 
 class PostagensController extends Controller
 {
@@ -20,7 +21,7 @@ class PostagensController extends Controller
 
     public function index()
     {
-        $id = Auth::id();
+        $id = Auth::user()->email;
         $postagens = DB::table('postagens')->where('usuario', '$id')->get();
         return view ('postUsuario',['postagem'=> $postagens]);
     }

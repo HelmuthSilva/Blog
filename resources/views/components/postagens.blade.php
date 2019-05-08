@@ -2,7 +2,7 @@
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         <div class="post-preview">
-          <a href="post.html">
+          <a href="/ver_post/{{$id}}">
             <h2 class="post-title">
               {{$titulo}}
             </h2>

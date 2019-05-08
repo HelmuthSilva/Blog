@@ -24,5 +24,6 @@
             {{$texto}}
         </div>
       </div>
+      <a href="/comentar/{{$id}}" class="btn btn-dark"> Comentar </a>
     </div>
   </article>

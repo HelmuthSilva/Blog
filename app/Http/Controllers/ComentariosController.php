@@ -23,9 +23,9 @@ class ComentariosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        return view('comentar', compact('id'));
     }
 
     /**
@@ -34,12 +34,12 @@ class ComentariosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$id)
+    public function store(Request $request)
     {
         $comentarios = new Comentarios();
         $comentarios->texto_comentario = $request->input('comentario');
         $comentarios->nome_usuario=Auth::user()->name;
-        $comentarios->postagem = $id;
+        $comentarios->postagem = $request->input('id');
         $comentarios->save();
 
         return redirect('')->with('message','Comentário feito!');
@@ -80,8 +80,10 @@ class ComentariosController extends Controller
         $comentarios = Comentarios::find($id);
 
         if(isset($comentarios)){
-        $postagens->texto_comentario = $request->input('comentario');
-        $postagens->save();
+        $comentarios->nome_usuario= $request->input('nome_usuario');
+        $comentarios->postagem= $request->input('postagem');
+        $comentarios->texto_comentario = $request->input('comentario');
+        $comentarios->save();
         }
         return view('')->with('message','Post atualizado com sucesso!');
     }
