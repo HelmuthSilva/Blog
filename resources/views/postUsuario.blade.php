@@ -5,16 +5,27 @@
 
 @endnavegar
 
-
 @foreach($postagens as $pubs)
-    @postagens([
-        'titulo' => '{{$pubs->titulo}}', 
-        'descricao' =>'{{$pubs->descricao}}',
-        'nome' => '{{$pubs->autor}}',
-        'dia' => '{{$pubs->dia}}',
-        'id' => '{{$pubs->id}}'])
+    @postagens()
+        @slot('titulo')
+            {{$pubs->nomePost}}
+        @endslot
 
-        
+        @slot('descricao')
+            {{$pubs->descricao}}
+        @endslot
+
+        @slot('nome')
+            {{$pubs->usuario}}
+        @endslot
+
+        @slot('dia')
+            {{$pubs->created_at}}
+        @endslot
+
+        @slot('id')
+            {{$pubs->id}}
+        @endslot        
     @endpostagens
 @endforeach
 

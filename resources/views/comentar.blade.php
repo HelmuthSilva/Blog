@@ -6,10 +6,10 @@
 
 <form class="container" action="/criar_comentario" method="POST">
 
+    <label for="titulo"> Comentário: </label>
     <div class="form-group">
-        <label for="titulo"> Comentário: </label>
-        <textarea name="comentario" rows="5" cols="10">
-            </textarea>
+        <textarea name="comentario" rows="3" cols="30">
+       </textarea>
     </div>
 
     <input type="hidden" name="postagem" value="{{ $id }}"/>

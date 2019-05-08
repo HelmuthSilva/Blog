@@ -23,6 +23,11 @@ class PostagensController extends Controller
         $this->middleware('auth');
     }
 
+    public function exibirTodas(){
+        $postagens = Postagens::all();
+        return view('index', compact('postagens'));
+    }
+
     public function index()
     {
         //$id = Auth::id();
@@ -66,9 +71,10 @@ class PostagensController extends Controller
      * @param  \App\Postagens $postagem
      * @return \Illuminate\Http\Response
      */
-    public function show(Postagens $postagens)
+    public function show($id)
     {
-        return view('paginaPost',compact('postagens',$postagens));
+        $postagens = Postagens::find($id);
+        return view('paginaPost',compact('postagens'));
     }
 
     /**
@@ -80,7 +86,7 @@ class PostagensController extends Controller
     public function edit($id)
     {
         $postagens = Postagens::find($id);
-        return view('editarPost', ['postagem'=> $postagens]);
+        return view('editarPublicacao', ['postagem'=> $postagens]);
     }
 
     /**

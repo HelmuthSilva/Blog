@@ -24,6 +24,22 @@
             {{$texto}}
         </div>
       </div>
-      <a href="/comentar/{{$id}}" class="btn btn-dark"> Comentar </a>
     </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+        <a href="/comentar/{{$id}}" class="btn btn-dark"> Comentar </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+        <h5 class="card-title">Comentários</h5>
+        </div>
+      </div>
+    </div>
+
   </article>

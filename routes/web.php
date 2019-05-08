@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-
 Route::get('/publicar', function(){
     return view('publicar');
 });
@@ -25,6 +21,7 @@ Route::get('/comentar', function(){
 
 Auth::routes();
 
+Route::get('/', 'PostagensController@exibirTodas');
 Route::post('criar_postagem', 'PostagensController@store');
 Route::get('/home', 'HomeController@index')->name('home');
 //Rotas de postagem

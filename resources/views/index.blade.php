@@ -17,15 +17,30 @@
 
 
 <!-- Postagens -->
-@foreach ($postagens as $post)
-  <tr>
-            <td>{{$post->nomePost}}</td>
-            <td>{{$post->imagem}}</td>
-            <td>{{$post->descricao}}</td>
-            <td>{{$car->usuario}}</td>
-<td></td>
-</tr>
+@foreach ($postagens as $pubs)
+@postagens()
+        @slot('titulo')
+            {{$pubs->nomePost}}
+        @endslot
+
+        @slot('descricao')
+            {{$pubs->descricao}}
+        @endslot
+
+        @slot('nome')
+            {{$pubs->usuario}}
+        @endslot
+
+        @slot('dia')
+            {{$pubs->created_at}}
+        @endslot
+
+        @slot('id')
+            {{$pubs->id}}
+        @endslot        
+    @endpostagens
 @endforeach
+
 <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">

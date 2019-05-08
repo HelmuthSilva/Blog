@@ -16,10 +16,12 @@
         </div>
         <hr>
         <!-- Pager -->
-        <div class="clearfix">
-          <a class="btn btn-danger" href="/excluir_postagem/{{$id}}">Excluir Postagem</a>
-          <a class="btn btn-warning" href="editar_postagem/{{$id}}">Editar Postagem</a>
-        </div>
+        @if($nome == Auth::user()->name)
+          <div class="clearfix">
+            <a class="btn btn-warning" href="editar_postagem/{{$id}}">Editar Postagem</a>
+            <a class="btn btn-danger" href="/excluir_postagem/{{$id}}">Excluir Postagem</a>
+          </div>
+        @endif
       </div>
     </div>
   </div>
