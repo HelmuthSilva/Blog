@@ -28,6 +28,7 @@ Auth::routes();
 Route::post('criar_postagem', 'PostagensController@store');
 Route::get('/home', 'HomeController@index')->name('home');
 //Rotas de postagem
+Route::group(['middleware' => ['auth']], function() {
 Route::post('store_postagem', 'PostagensController@store');
 Route::get('/ver_post/{id}', 'PostagensController@show');
 Route::get('/excluir_postagem/{id}', 'PostagensController@destroy');
@@ -42,3 +43,4 @@ Route::get('/post_comentario/{id}', 'ComentariosController@show');
 Route::get('/excluir_comentario/{id}', 'ComentariosController@destroy');
 Route::get('/editar_comentario/{id}', 'ComentariosController@edit');
 Route::post('update_comentario/{id}', 'ComentariosController@update');
+});

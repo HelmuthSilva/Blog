@@ -17,6 +17,15 @@
 
 
 <!-- Postagens -->
+@foreach ($postagens as $post)
+  <tr>
+            <td>{{$post->nomePost}}</td>
+            <td>{{$post->imagem}}</td>
+            <td>{{$post->descricao}}</td>
+            <td>{{$car->usuario}}</td>
+<td></td>
+</tr>
+@endforeach
 <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">

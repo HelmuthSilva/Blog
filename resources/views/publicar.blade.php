@@ -3,7 +3,8 @@
 @navegar()
 
 @endnavegar
-    <form class="container" action="store_postagem" method="POST">
+    <form class="container" action="store_postagem" method="POST" enctype="multipart/form-data">
+    @csrf
         <div class="form-group">
             <label for="titulo"> Título: </label>
                 <input type="text" name="titulo"/>

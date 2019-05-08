@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\DB;
+use Auth;
 use App\Postagens;
 use App\User;
 
@@ -21,9 +25,10 @@ class PostagensController extends Controller
 
     public function index()
     {
-        $id = Auth::user()->email;
-        $postagens = DB::table('postagens')->where('usuario', '$id')->get();
-        return view ('postUsuario',['postagem'=> $postagens]);
+        //$id = Auth::id();
+        //$postagens = DB::table('postagens')->where('usuario','=', '$id')->get();
+        $postagens = Postagens::all();
+        return view ('postUsuario',compact('postagens'));
     }
 
     /**
@@ -45,9 +50,9 @@ class PostagensController extends Controller
     {
         $postagens = new Postagens();
 
-        $postagens->nomePost = $request->input('nome_postagem');
-        $postagens->texto = $request->input('texto_post');
-        $postagens->descricao = $request->input('descricao_post');
+        $postagens->nomePost = $request->input('titulo');
+        $postagens->texto = $request->input('texto');
+        $postagens->descricao = $request->input('descricao');
         $postagens->usuario = Auth::id();
         $postagens->imagem = Storage::putFile('iPostagens', $request->file('imagem'));
         $postagens->save();
@@ -63,7 +68,7 @@ class PostagensController extends Controller
      */
     public function show(Postagens $postagens)
     {
-        return view('',compact('postagens',$postagens));
+        return view('paginaPost',compact('postagens',$postagens));
     }
 
     /**
