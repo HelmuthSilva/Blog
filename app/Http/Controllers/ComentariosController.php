@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Comentarios;
+use Auth;
 
 class ComentariosController extends Controller
 {
@@ -34,15 +35,15 @@ class ComentariosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         $comentarios = new Comentarios();
         $comentarios->texto_comentario = $request->input('comentario');
         $comentarios->nome_usuario=Auth::user()->name;
-        $comentarios->postagem = $request->input('id');
+        $comentarios->postagem = $id;
         $comentarios->save();
 
-        return redirect('')->with('message','Comentário feito!');
+        return view('index')->with('message','Comentário feito!');
     }
 
     /**

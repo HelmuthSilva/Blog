@@ -16,11 +16,15 @@
         </div>
         <hr>
         <!-- Pager -->
+        @if (Route::has('login'))
+        @auth
         @if($nome == Auth::user()->name)
           <div class="clearfix">
             <a class="btn btn-warning" href="editar_postagem/{{$id}}">Editar Postagem</a>
             <a class="btn btn-danger" href="/excluir_postagem/{{$id}}">Excluir Postagem</a>
           </div>
+        @endif
+        @endauth
         @endif
       </div>
     </div>

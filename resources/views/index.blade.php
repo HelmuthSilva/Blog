@@ -20,23 +20,23 @@
 @foreach ($postagens as $pubs)
 @postagens()
         @slot('titulo')
-            {{$pubs->nomePost}}
+            {{$pubs['nomePost']}}
         @endslot
 
         @slot('descricao')
-            {{$pubs->descricao}}
+            {{$pubs['descricao']}}
         @endslot
 
         @slot('nome')
-            {{$pubs->usuario}}
+            {{$pubs['usuario']}}
         @endslot
 
         @slot('dia')
-            {{$pubs->created_at}}
+            {{$pubs['created_at']}}
         @endslot
 
         @slot('id')
-            {{$pubs->id}}
+            {{$pubs['id']}}
         @endslot        
     @endpostagens
 @endforeach

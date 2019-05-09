@@ -5,7 +5,7 @@
 @endnavegar
 
 <form class="container" action="/criar_comentario" method="POST">
-
+@csrf
     <label for="titulo"> Comentário: </label>
     <div class="form-group">
         <textarea name="comentario" rows="3" cols="30">

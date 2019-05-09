@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Postagens;
 
 class HomeController extends Controller
@@ -12,20 +13,15 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
+    
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-
     {
-        $postagens = Postagens::orderBy('created_at','desc');
-        return view('/', compact('postagens'));
+        $postagens = Postagens::all()->sortByDesc('created_at');
+        return view('index',compact('postagens'));
     }
 }

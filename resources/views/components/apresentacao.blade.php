@@ -4,8 +4,8 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
-            <h1>Food recipes</h1>
-            <span class="subheading">Ebooks de receitas</span>
+            <h1>Food Recipes</h1>
+            <span class="subheading">E-books de Receitas</span>
           </div>
         </div>
       </div>

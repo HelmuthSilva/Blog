@@ -18,11 +18,6 @@ class PostagensController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function exibirTodas(){
         $postagens = Postagens::all();
         return view('index', compact('postagens'));
