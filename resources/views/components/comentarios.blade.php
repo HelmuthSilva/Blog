@@ -1,3 +1,5 @@
+<div class="container">
+<div class="col-lg-8 col-md-10 mx-auto">
 <div class="card" style="width: 18rem;">
   <div class="card-body">
     <!--<h5 class="card-title">Comentários</h5> -->
@@ -5,7 +7,11 @@
         <p class="card-text">
             {{$comentario}}
         </p>
+    @if($nome == Auth::user()->name)
     <a href="/editar_comentario/{{$id}}" class="btn btn-warning">Editar</a>
     <a href="/excluir_comentario/{{$id}}" class="btn btn-danger">Excluir</a>
+    @endif
   </div>
+</div>
+</div>
 </div>

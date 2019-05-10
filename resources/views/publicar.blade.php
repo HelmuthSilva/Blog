@@ -1,5 +1,6 @@
 @extends('layouts.layout')
 
+@section('conteudo')
 @navegar()
 
 @endnavegar
@@ -39,3 +40,4 @@
 @rodape()
 
 @endrodape
+@endsection

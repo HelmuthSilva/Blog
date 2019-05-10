@@ -38,6 +38,24 @@
 
 @endpostagemCompleta
 
+@foreach($comentarios as $com)
+@comentarios()
+    @slot('nome')
+        {{$com->nome_usuario}}
+    @endslot
+
+    @slot('comentario')
+        {{$com->texto_comentario}}
+    @endslot
+
+    @slot('id')
+        {{$com->id}}
+    @endslot
+
+@endcomentarios
+@endforeach
+
+
 
 @rodape()
 

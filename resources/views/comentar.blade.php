@@ -1,5 +1,6 @@
 @extends('layouts.layout')
 
+@section('conteudo')
 @navegar()
 
 @endnavegar
@@ -12,7 +13,7 @@
        </textarea>
     </div>
 
-    <input type="hidden" name="postagem" value="{{ $id }}"/>
+    <input type="hidden" name="postagem" value="{{ $postagens->id }}"/>
 
     <div class="form-group">
         <button type="submit" class="btn btn-info">
@@ -25,3 +26,4 @@
 @rodape()
 
 @endrodape
+@endsection

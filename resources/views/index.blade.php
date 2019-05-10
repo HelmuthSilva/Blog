@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 
-
+@section('conteudo')
 <!-- Barra de navegação -->
 @navegar()
 
@@ -111,3 +111,4 @@
 
 @endrodape
 <!-- -->
+@endsection

@@ -1,12 +1,15 @@
 @extends('layouts.layout')
 
 
+@section('conteudo')
 @navegar()
 
 @endnavegar
 
+
 @foreach($postagens as $pubs)
-    @postagens()
+@if($pubs->usuario == Auth::user()->id)
+    @postagensP()
         @slot('titulo')
             {{$pubs->nomePost}}
         @endslot
@@ -26,9 +29,11 @@
         @slot('id')
             {{$pubs->id}}
         @endslot        
-    @endpostagens
+    @endpostagensP
+@endif
 @endforeach
 
 @rodape()
 
 @endrodape
+@endsection

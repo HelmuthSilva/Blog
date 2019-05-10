@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Comentarios;
+use App\Postagens;
 use Auth;
 
 class ComentariosController extends Controller
@@ -16,7 +17,7 @@ class ComentariosController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -26,7 +27,8 @@ class ComentariosController extends Controller
      */
     public function create($id)
     {
-        return view('comentar', compact('id'));
+        $postagens = Postagens::find($id);
+        return view('comentar', compact('postagens'));
     }
 
     /**
@@ -35,15 +37,17 @@ class ComentariosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         $comentarios = new Comentarios();
+        $postagens = Postagens::all();
+
         $comentarios->texto_comentario = $request->input('comentario');
         $comentarios->nome_usuario=Auth::user()->name;
-        $comentarios->postagem = $id;
+        $comentarios->postagem = $request->input('postagem');
         $comentarios->save();
 
-        return view('index')->with('message','Comentário feito!');
+        return view('index', compact('postagens'))->with('message','Comentário feito!');
     }
 
     /**
@@ -65,8 +69,8 @@ class ComentariosController extends Controller
      */
     public function edit($id)
     {
-        $comentarios = Comentarios::find($id);
-        return view('', ['comentario => $comentarios']);
+        $comentario = Comentarios::find($id);
+        return view('editarComentario', compact('comentario'));
     }
 
     /**
@@ -79,6 +83,7 @@ class ComentariosController extends Controller
     public function update(Request $request, $id)
     {
         $comentarios = Comentarios::find($id);
+        $postagens = Postagens::all();
 
         if(isset($comentarios)){
         $comentarios->nome_usuario= $request->input('nome_usuario');
@@ -86,7 +91,7 @@ class ComentariosController extends Controller
         $comentarios->texto_comentario = $request->input('comentario');
         $comentarios->save();
         }
-        return view('')->with('message','Post atualizado com sucesso!');
+        return view('index', compact('postagens'))->with('message','Post atualizado com sucesso!');
     }
 
     /**

@@ -15,10 +15,6 @@ Route::get('/publicar', function(){
     return view('publicar');
 });
 
-Route::get('/comentar', function(){
-    return view('comentar');
-});
-
 Auth::routes();
 
 Route::get('/', 'PostagensController@exibirTodas');
@@ -35,9 +31,9 @@ Route::get('/mostrar_postagens', 'PostagensController@index');
 
 //Rotas de comentários
 Route::get('/comentar/{id}', 'ComentariosController@create');
-Route::post('/criar_comentario/{id}', 'ComentariosController@store');
+Route::post('/criar_comentario', 'ComentariosController@store');
 Route::get('/post_comentario/{id}', 'ComentariosController@show');
 Route::get('/excluir_comentario/{id}', 'ComentariosController@destroy');
 Route::get('/editar_comentario/{id}', 'ComentariosController@edit');
-Route::post('update_comentario/{id}', 'ComentariosController@update');
+Route::post('/update_comentario/{id}', 'ComentariosController@update');
 });

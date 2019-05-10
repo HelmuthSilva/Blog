@@ -9,6 +9,7 @@ use Illuminate\Http\File;
 use Illuminate\Support\Facades\DB;
 use Auth;
 use App\Postagens;
+use App\Comentarios;
 use App\User;
 
 class PostagensController extends Controller
@@ -38,6 +39,7 @@ class PostagensController extends Controller
      */
     public function create()
     {
+
     }
 
     /**
@@ -69,7 +71,12 @@ class PostagensController extends Controller
     public function show($id)
     {
         $postagens = Postagens::find($id);
-        return view('paginaPost',compact('postagens'));
+        $comentarios = DB::table('postagens')
+        ->join('comentarios','postagens.id','=','comentarios.postagem')
+        ->select('comentarios.*')
+        ->where('postagens.id','=',$id)
+        ->get();
+        return view('paginaPost',compact('postagens','comentarios'));
     }
 
     /**
