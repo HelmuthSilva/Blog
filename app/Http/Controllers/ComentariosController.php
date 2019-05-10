@@ -47,7 +47,7 @@ class ComentariosController extends Controller
         $comentarios->postagem = $request->input('postagem');
         $comentarios->save();
 
-        return view('index', compact('postagens'))->with('message','Comentário feito!');
+        return view('index', compact('postagens'));
     }
 
     /**

@@ -17,9 +17,9 @@ Route::get('/publicar', function(){
 
 Auth::routes();
 
-Route::get('/', 'PostagensController@exibirTodas');
+Route::get('/', 'HomeController@index')->name('home');
 Route::post('criar_postagem', 'PostagensController@store');
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/ver_post/{id}', 'PostagensController@show');
 //Rotas de postagem
 Route::group(['middleware' => ['auth']], function() {

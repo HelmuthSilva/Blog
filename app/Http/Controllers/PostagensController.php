@@ -109,7 +109,7 @@ class PostagensController extends Controller
         $postagens->imagem = Storage::putFile('iPostagens', $request->file('imagem'));
         $postagens->save();
         }
-        return view('postUsuario')->with('message','Post atualizado com sucesso!');
+        return redirect()->route('ver_post'[$id]);
     }
 
     /**

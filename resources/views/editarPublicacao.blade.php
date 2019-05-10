@@ -5,6 +5,7 @@
 
 @endnavegar
     <form class="container" action="/update_postagem/{{$postagem->id}}" method="POST">
+    @csrf
         <div class="form-group">
             <label for="titulo"> Título: </label>
                 <input type="text" name="titulo" value="{{$postagem->nomePost}}">
