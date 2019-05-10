@@ -21,7 +21,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $postagens = Postagens::all()->sortByDesc('created_at');
+        $postagens = Postagens::select('users.name as nome', 'postagens.nomePost', 'postagens.descricao', 'postagens.created_at', 'postagens.id')
+        ->join('users','users.id' , '=', 'postagens.usuario' )
+        ->orderBy('postagens.created_at','desc')
+        ->get();
         return view('index',compact('postagens'));
     }
 }

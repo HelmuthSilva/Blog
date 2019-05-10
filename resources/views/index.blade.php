@@ -28,7 +28,7 @@
         @endslot
 
         @slot('nome')
-            {{$pubs['usuario']}}
+            {{$pubs['nome']}}
         @endslot
 
         @slot('dia')
