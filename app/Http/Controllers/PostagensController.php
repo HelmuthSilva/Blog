@@ -52,11 +52,13 @@ class PostagensController extends Controller
     {
         $postagens = new Postagens();
 
+        $caminho = $request->file('imagem')->store('imagens','public');
+
         $postagens->nomePost = $request->input('titulo');
         $postagens->texto = $request->input('texto');
         $postagens->descricao = $request->input('descricao');
         $postagens->usuario = Auth::id();
-        $postagens->imagem = Storage::putFile('iPostagens', $request->file('imagem'));
+        $postagens->imagem = $caminho;
         $postagens->save();
 
         return redirect('/')->with('message', 'Post criado com sucesso!');
@@ -70,13 +72,15 @@ class PostagensController extends Controller
      */
     public function show($id)
     {
+        $usuario = Auth::user()->id;
+
         $postagens = Postagens::find($id);
         $comentarios = DB::table('postagens')
         ->join('comentarios','postagens.id','=','comentarios.postagem')
         ->select('comentarios.*')
         ->where('postagens.id','=',$id)
         ->get();
-        return view('paginaPost',compact('postagens','comentarios'));
+        return view('paginaPost',compact('postagens','comentarios', 'usuario'));
     }
 
     /**
@@ -101,15 +105,23 @@ class PostagensController extends Controller
     public function update(Request $request, $id)
     {
         $postagens = Postagens::find($id);
+        $comentarios = DB::table('postagens')
+        ->join('comentarios','postagens.id','=','comentarios.postagem')
+        ->select('comentarios.*')
+        ->where('postagens.id','=',$id)
+        ->get();
+
+        $caminho = $request->file('imagem')->store('imagens','public');
 
         if(isset($postagens)){
-        $postagens->nomePost = $request->input('nome_postagem');
-        $postagens->texto = $request->input('texto_post');
-        $postagens->descricao = $request->input('descricao_post');
-        $postagens->imagem = Storage::putFile('iPostagens', $request->file('imagem'));
+        $postagens->nomePost = $request->input('titulo');
+        $postagens->usuario = Auth::id();
+        $postagens->texto = $request->input('texto');
+        $postagens->descricao = $request->input('descricao');
+        $postagens->imagem = $caminho;
         $postagens->save();
         }
-        return redirect()->route('ver_post'[$id]);
+        return view('paginaPost',compact('postagens','comentarios'));
     }
 
     /**
@@ -125,6 +137,8 @@ class PostagensController extends Controller
         DB::table('comentarios')->where('postagem',$id)->delete();
 
         if(isset($postagens)){
+            $imagem = $postagens->imagem;
+            Storage::disk('public')->delete($imagem);
             $postagens->delete();
         }
         return redirect('/');

@@ -8,6 +8,10 @@
 
 @postagemCompleta()
 
+        @slot('imagem')
+            {{$postagens->imagem}}
+        @endslot
+
         @slot('titulo')
              {{$postagens->nomePost}}
         @endslot
@@ -50,6 +54,14 @@
 
     @slot('id')
         {{$com->id}}
+    @endslot
+
+    @slot('autorPub')
+        {{$usuario}}
+    @endslot
+
+    @slot('autP')
+        {{$postagens->usuario}}
     @endslot
 
 @endcomentarios

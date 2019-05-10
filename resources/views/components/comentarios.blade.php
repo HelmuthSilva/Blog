@@ -7,8 +7,14 @@
         <p class="card-text">
             {{$comentario}}
         </p>
-    @if($nome == Auth::user()->name)
+
+    <div type="hidden" value="{{$autorPub}}"></div>
+    <div type="hidden" value="{{$autP}}"></div>
+
+  @if($nome == Auth::user()->name)
     <a href="/editar_comentario/{{$id}}" class="btn btn-warning">Editar</a>
+    <a href="/excluir_comentario/{{$id}}" class="btn btn-danger">Excluir</a>
+    @elseif($autorPub == $autP)
     <a href="/excluir_comentario/{{$id}}" class="btn btn-danger">Excluir</a>
     @endif
   </div>

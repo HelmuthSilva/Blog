@@ -16,7 +16,7 @@ class CreatePostagensTable extends Migration
         Schema::create('postagens', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
             $table->string('nomePost');
-            $table->longText('imagem')->nullable();
+            $table->string('imagem');
             $table->longText('texto');
             $table->string('descricao');
             $table->integer('usuario');
