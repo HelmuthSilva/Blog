@@ -33,5 +33,7 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('components.postagensPessoal', 'postagensP');
         Blade::component('components.pagPost', 'postagemCompleta');
         Blade::component('components.comentarios', 'comentarios');
+        Blade::component('components.navegarAdmin', 'navAdm');
+        Blade::component('components.postagensAdmin', 'gerPostagens');
     }
 }

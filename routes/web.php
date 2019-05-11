@@ -15,6 +15,13 @@ Route::get('/publicar', function(){
     return view('publicar');
 });
 
+Route::get('/admin','AdminController@index')->name('adminInicial');
+Route::get('/admin/publicacoes','AdminController@publicacoes');
+Route::get('/admin/apagarPost/{$id}', 'AdminController@removePost');
+
+Route::get('/admin/login','Auth\AdminLoginController@index')->name('admin.login');
+Route::post('/admin/login','Auth\AdminLoginController@index')->name('admin.login.submit');
+
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
