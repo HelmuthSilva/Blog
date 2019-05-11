@@ -21,7 +21,7 @@
         @endslot
 
         @slot('nome')
-           {{$postagens->usuario}}
+           {{$postagens->nome}}
         @endslot
 
         @slot('data')
@@ -57,7 +57,7 @@
     @endslot
 
     @slot('autorPub')
-        {{$usuario}}
+        {{$nomeuser->nome}}
     @endslot
 
     @slot('autP')

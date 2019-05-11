@@ -72,15 +72,18 @@ class PostagensController extends Controller
      */
     public function show($id)
     {
-        $usuario = Auth::user()->id;
-
         $postagens = Postagens::find($id);
         $comentarios = DB::table('postagens')
         ->join('comentarios','postagens.id','=','comentarios.postagem')
         ->select('comentarios.*')
         ->where('postagens.id','=',$id)
         ->get();
-        return view('paginaPost',compact('postagens','comentarios', 'usuario'));
+
+        $nomeuser = Postagens::select('users.name as nome', 'postagens.nomePost', 'postagens.descricao', 'postagens.created_at', 'postagens.id')
+        ->join('users','users.id' , '=', 'postagens.usuario' )
+        ->where('postagens.id', '=', $id)
+        ->first();
+        return view('paginaPost',compact('postagens','comentarios', 'nomeuser'));
     }
 
     /**
