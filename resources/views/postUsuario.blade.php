@@ -17,11 +17,7 @@
         @slot('descricao')
             {{$pubs->descricao}}
         @endslot
-
-        @slot('nome')
-            {{$pubs->usuario}}
-        @endslot
-
+        
         @slot('dia')
             {{$pubs->created_at}}
         @endslot

@@ -29,7 +29,7 @@
         @endslot
 
         @slot('autor')
-        {{$postagens->usuario}}
+        {{$nomeuser->nome}}
         @endslot
 
         @slot('texto')

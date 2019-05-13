@@ -1,3 +1,5 @@
+@if (Route::has('login'))
+@auth
 <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
@@ -11,10 +13,12 @@
             </h3>
           </a>
           <p class="post-meta">Postado por
-            <a href="#">{{$nome}}</a>
-            {{$dia}}</p>
+            <a href="#">Auth::user()->name</a>
+            em {{$dia}}</p>
         </div>
         <hr>
+@endauth
+@endif
         <!-- Pager -->
           <div class="clearfix">
             <a class="btn btn-warning" href="editar_postagem/{{$id}}">Editar Postagem</a>

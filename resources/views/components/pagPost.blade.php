@@ -9,7 +9,7 @@
             <h2 class="subheading">{{$descricao}}</h2>
             <span class="meta">Postado por:
               <a href="#">{{$autor}}</a>
-              {{$data}}</span>
+              em: {{$data}}</span>
           </div>
         </div>
       </div>
