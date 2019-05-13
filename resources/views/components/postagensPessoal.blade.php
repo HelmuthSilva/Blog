@@ -13,7 +13,7 @@
             </h3>
           </a>
           <p class="post-meta">Postado por
-            <a href="#">Auth::user()->name</a>
+            <a href="#">{{Auth::user()->name}}</a>
             em {{$dia}}</p>
         </div>
         <hr>
