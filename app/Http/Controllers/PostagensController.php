@@ -26,9 +26,9 @@ class PostagensController extends Controller
 
     public function index()
     {
-        //$id = Auth::id();
-        //$postagens = DB::table('postagens')->where('usuario','=', '$id')->get();
-        $postagens = Postagens::all();
+        $postagens = DB::table('postagens')
+        ->orderBy('postagens.created_at','desc')
+        ->get();
         return view ('postUsuario',compact('postagens'));
     }
 
