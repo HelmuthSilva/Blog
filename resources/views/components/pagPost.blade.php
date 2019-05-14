@@ -1,4 +1,4 @@
-  <!-- Page Header -->
+ <!-- Page Header -->
   <header class="masthead" style="background-image: url('/storage/{{$imagem}}')">
     <div class="overlay"></div>
     <div class="container">
@@ -41,6 +41,5 @@
         <h5 class="card-title">{{$quant}} Comentário(s)</h5>
         </div>
       </div>
-    </div>
-
+      <hr>
   </article>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use App\Comentarios;
 use App\Postagens;
 use Auth;
@@ -40,14 +41,36 @@ class ComentariosController extends Controller
     public function store(Request $request)
     {
         $comentarios = new Comentarios();
-        $postagens = Postagens::all();
+        $val = $request->input('postagem');
+        $postagens = Postagens::find($val);
+
+        $nomeuser = Postagens::select('users.name as nome', 'postagens.nomePost', 'postagens.descricao', 'postagens.created_at', 'postagens.id')
+        ->join('users','users.id' , '=', 'postagens.usuario' )
+        ->where('postagens.id', '=', $val)
+        ->first();
 
         $comentarios->texto_comentario = $request->input('comentario');
         $comentarios->nome_usuario=Auth::user()->name;
         $comentarios->postagem = $request->input('postagem');
         $comentarios->save();
 
-        return view('index', compact('postagens'));
+        $comentarios = DB::table('postagens')
+        ->join('comentarios','postagens.id','=','comentarios.postagem')
+        ->select('comentarios.*')
+        ->where('postagens.id','=',$val)
+        ->orderBy('comentarios.created_at','desc')
+        ->get();
+
+        $quantidadecoment = DB::table('comentarios')
+        ->where('comentarios.postagem','=',$val)
+        ->count();
+
+
+        return view('paginaPost')
+        ->with('postagens', $postagens)
+        ->with('comentarios', $comentarios)
+        ->with('nomeuser', $nomeuser)
+        ->with('quantidadecoment', $quantidadecoment);
     }
 
     /**
@@ -83,7 +106,9 @@ class ComentariosController extends Controller
     public function update(Request $request, $id)
     {
         $comentarios = Comentarios::find($id);
-        $postagens = Postagens::all();
+        $val = $request->input('postagem');
+        $postagens = Postagens::find($val);
+        
 
         if(isset($comentarios)){
         $comentarios->nome_usuario= $request->input('nome_usuario');
@@ -91,7 +116,29 @@ class ComentariosController extends Controller
         $comentarios->texto_comentario = $request->input('comentario');
         $comentarios->save();
         }
-        return view('/', compact('postagens'))->with('message','Post atualizado com sucesso!');
+        
+        $nomeuser = Postagens::select('users.name as nome', 'postagens.nomePost', 'postagens.descricao', 'postagens.created_at', 'postagens.id')
+        ->join('users','users.id' , '=', 'postagens.usuario' )
+        ->where('postagens.id', '=', $val)
+        ->first();
+
+        $comentarios = DB::table('postagens')
+        ->join('comentarios','postagens.id','=','comentarios.postagem')
+        ->select('comentarios.*')
+        ->where('postagens.id','=',$val)
+        ->orderBy('comentarios.created_at','desc')
+        ->get();
+
+        $quantidadecoment = DB::table('comentarios')
+        ->where('comentarios.postagem','=',$val)
+        ->count();
+
+
+        return view('paginaPost')
+        ->with('postagens', $postagens)
+        ->with('comentarios', $comentarios)
+        ->with('nomeuser', $nomeuser)
+        ->with('quantidadecoment', $quantidadecoment);
     }
 
     /**
@@ -100,7 +147,7 @@ class ComentariosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $comentarios = Comentarios::find($id);
         $comentarios->delete();

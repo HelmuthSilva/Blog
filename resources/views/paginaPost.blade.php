@@ -4,8 +4,6 @@
 @navegar()
 
 @endnavegar
-
-
 @postagemCompleta()
 
         @slot('imagem')
