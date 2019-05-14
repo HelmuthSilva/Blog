@@ -1,5 +1,5 @@
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('/storage/{{$imagem}})">
+  <header class="masthead" style="background-image: url('/storage/{{$imagem}}')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
