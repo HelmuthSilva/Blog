@@ -91,7 +91,7 @@ class ComentariosController extends Controller
         $comentarios->texto_comentario = $request->input('comentario');
         $comentarios->save();
         }
-        return view('index', compact('postagens'))->with('message','Post atualizado com sucesso!');
+        return view('/', compact('postagens'))->with('message','Post atualizado com sucesso!');
     }
 
     /**
@@ -104,6 +104,6 @@ class ComentariosController extends Controller
     {
         $comentarios = Comentarios::find($id);
         $comentarios->delete();
-        return redirect('');
+        return redirect('/');
     }
 }

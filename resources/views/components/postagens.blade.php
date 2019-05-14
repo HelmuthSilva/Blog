@@ -14,7 +14,6 @@
             <a href="#">{{$nome}}</a>
             {{$dia}}</p>
         </div>
-        <hr>
         <!-- Pager -->
         @if (Route::has('login'))
         @auth

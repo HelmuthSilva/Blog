@@ -1,5 +1,5 @@
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('/storage/{{$imagem}}')">
+  <header class="masthead" style="background-image: url('/storage/{{$imagem}})">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
@@ -25,7 +25,8 @@
         </div>
       </div>
     </div>
-
+<hr>
+<br/>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
@@ -33,11 +34,11 @@
         </div>
       </div>
     </div>
-
+    <br/>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-        <h5 class="card-title">Comentários</h5>
+        <h5 class="card-title">{{$quant}} Comentário(s)</h5>
         </div>
       </div>
     </div>

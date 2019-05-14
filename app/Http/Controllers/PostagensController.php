@@ -77,13 +77,17 @@ class PostagensController extends Controller
         ->join('comentarios','postagens.id','=','comentarios.postagem')
         ->select('comentarios.*')
         ->where('postagens.id','=',$id)
+        ->orderBy('comentarios.created_at','desc')
         ->get();
 
         $nomeuser = Postagens::select('users.name as nome', 'postagens.nomePost', 'postagens.descricao', 'postagens.created_at', 'postagens.id')
         ->join('users','users.id' , '=', 'postagens.usuario' )
         ->where('postagens.id', '=', $id)
         ->first();
-        return view('paginaPost',compact('postagens','comentarios', 'nomeuser'));
+        $quantidadecoment = DB::table('comentarios')
+        ->where('comentarios.postagem','=',$id)
+        ->count();
+        return view('paginaPost',compact('postagens','comentarios', 'nomeuser','quantidadecoment'));
     }
 
     /**
@@ -112,6 +116,7 @@ class PostagensController extends Controller
         ->join('comentarios','postagens.id','=','comentarios.postagem')
         ->select('comentarios.*')
         ->where('postagens.id','=',$id)
+        ->orderBy('comentarios.created_at','desc')
         ->get();
 
         $caminho = $request->file('imagem')->store('imagens','public');
@@ -124,7 +129,16 @@ class PostagensController extends Controller
         $postagens->imagem = $caminho;
         $postagens->save();
         }
-        return view('paginaPost',compact('postagens','comentarios'));
+
+        $nomeuser = Postagens::select('users.name as nome', 'postagens.nomePost', 'postagens.descricao', 'postagens.created_at', 'postagens.id')
+        ->join('users','users.id' , '=', 'postagens.usuario' )
+        ->where('postagens.id', '=', $id)
+        ->first();
+
+        $quantidadecoment = DB::table('comentarios')
+        ->where('comentarios.postagem','=',$id)
+        ->count();
+        return view('paginaPost',compact('postagens','comentarios','nomeuser','quantidadecoment'));
     }
 
     /**

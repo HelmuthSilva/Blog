@@ -40,6 +40,10 @@
            {{$postagens->id}}
         @endslot
 
+        @slot('quant')
+        {{$quantidadecoment}}
+        @endslot
+
 @endpostagemCompleta
 
 @foreach($comentarios as $com)
@@ -63,6 +67,10 @@
     @slot('autP')
         {{$postagens->usuario}}
     @endslot
+    @slot('hr')
+        {{$com->created_at}}
+    @endslot
+    
 
 @endcomentarios
 @endforeach
