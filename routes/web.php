@@ -22,7 +22,7 @@ Route::get('/admin/apagarPost/{$id}', 'AdminController@removePost');
 Route::get('/admin/login','Auth\AdminLoginController@index')->name('admin.login');
 Route::post('/admin/login','Auth\AdminLoginController@index')->name('admin.login.submit');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::post('criar_postagem', 'PostagensController@store');
