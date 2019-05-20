@@ -71,7 +71,6 @@ class DurationLimiter
      * @param  int $timeout
      * @param  callable|null $callback
      * @return bool
-     *
      * @throws \Illuminate\Contracts\Redis\LimiterTimeoutException
      */
     public function block($timeout, $callback = null)

@@ -428,7 +428,7 @@ class Migrator
     public function getMigrationFiles($paths)
     {
         return Collection::make($paths)->flatMap(function ($path) {
-            return Str::endsWith($path, '.php') ? [$path] : $this->files->glob($path.'/*_*.php');
+            return $this->files->glob($path.'/*_*.php');
         })->filter()->sortBy(function ($file) {
             return $this->getMigrationName($file);
         })->values()->keyBy(function ($file) {
@@ -580,7 +580,7 @@ class Migrator
     }
 
     /**
-     * Write a note to the console's output.
+     * Write a note to the conosle's output.
      *
      * @param  string  $message
      * @return void

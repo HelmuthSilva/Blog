@@ -15,6 +15,17 @@ Route::get('/publicar', function(){
     return view('publicar');
 });
 
+Route::get('/w', function () {
+    return view('welcome');
+});
+
+Route::get('/','HomeController@index')->name('home');
+
+
+Route::match(['get', 'post'], '/botman', 'BotManController@handle');
+Route::get('/botman/tinker', 'BotManController@tinker');
+
+
 Route::get('/admin','AdminController@index')->name('adminInicial');
 Route::get('/admin/publicacoes','AdminController@publicacoes');
 Route::get('/admin/apagarPost/{$id}', 'AdminController@removePost');
@@ -44,3 +55,10 @@ Route::get('/excluir_comentario/{id}', 'ComentariosController@destroy');
 Route::get('/editar_comentario/{id}', 'ComentariosController@edit');
 Route::post('/update_comentario/{id}', 'ComentariosController@update');
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

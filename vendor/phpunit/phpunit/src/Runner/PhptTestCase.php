@@ -49,7 +49,7 @@ class PhptTestCase implements Test, SelfDescribing
         'report_memleaks=0',
         'report_zend_debug=0',
         'safe_mode=0',
-        'xdebug.default_enable=0',
+        'xdebug.default_enable=0'
     ];
 
     /**
@@ -61,11 +61,6 @@ class PhptTestCase implements Test, SelfDescribing
      * @var AbstractPhpProcess
      */
     private $phpUtil;
-
-    /**
-     * @var string
-     */
-    private $output = '';
 
     /**
      * Constructs a test case with the given filename.
@@ -109,21 +104,13 @@ class PhptTestCase implements Test, SelfDescribing
      */
     public function run(TestResult $result = null): TestResult
     {
+        $sections = $this->parse();
+        $code     = $this->render($sections['FILE']);
+
         if ($result === null) {
             $result = new TestResult;
         }
 
-        try {
-            $sections = $this->parse();
-        } catch (Exception $e) {
-            $result->startTest($this);
-            $result->addFailure($this, new SkippedTestError($e->getMessage()), 0);
-            $result->endTest($this, 0);
-
-            return $result;
-        }
-
-        $code     = $this->render($sections['FILE']);
         $xfail    = false;
         $settings = $this->parseIniSection(self::SETTINGS);
 
@@ -168,9 +155,8 @@ class PhptTestCase implements Test, SelfDescribing
 
         Timer::start();
 
-        $jobResult    = $this->phpUtil->runJob($code, $this->stringifyIni($settings));
-        $time         = Timer::stop();
-        $this->output = $jobResult['stdout'] ?? '';
+        $jobResult = $this->phpUtil->runJob($code, $this->stringifyIni($settings));
+        $time      = Timer::stop();
 
         if ($result->getCollectCodeCoverageInformation() && ($coverage = $this->cleanupForCoverage())) {
             $result->getCodeCoverage()->append($coverage, $this, true, [], [], true);
@@ -214,26 +200,6 @@ class PhptTestCase implements Test, SelfDescribing
     public function toString(): string
     {
         return $this->filename;
-    }
-
-    public function usesDataProvider(): bool
-    {
-        return false;
-    }
-
-    public function getNumAssertions(): int
-    {
-        return 1;
-    }
-
-    public function getActualOutput(): string
-    {
-        return $this->output;
-    }
-
-    public function hasOutput(): bool
-    {
-        return !empty($this->output);
     }
 
     /**
@@ -379,7 +345,7 @@ class PhptTestCase implements Test, SelfDescribing
             'CGI',
             'EXPECTHEADERS',
             'EXTENSIONS',
-            'PHPDBG',
+            'PHPDBG'
         ];
 
         foreach (\file($this->filename) as $line) {
@@ -391,7 +357,7 @@ class PhptTestCase implements Test, SelfDescribing
             }
 
             if (empty($section)) {
-                throw new Exception('Invalid PHPT file: empty section header');
+                throw new Exception('Invalid PHPT file');
             }
 
             $sections[$section] .= $line;
@@ -411,7 +377,7 @@ class PhptTestCase implements Test, SelfDescribing
         foreach ($unsupportedSections as $section) {
             if (isset($sections[$section])) {
                 throw new Exception(
-                    "PHPUnit does not support PHPT $section sections"
+                    'PHPUnit does not support this PHPT file'
                 );
             }
         }
@@ -428,7 +394,7 @@ class PhptTestCase implements Test, SelfDescribing
             'FILE',
             'EXPECT',
             'EXPECTF',
-            'EXPECTREGEX',
+            'EXPECTREGEX'
         ];
         $testDirectory = \dirname($this->filename) . \DIRECTORY_SEPARATOR;
 
@@ -461,8 +427,8 @@ class PhptTestCase implements Test, SelfDescribing
             [
                 'EXPECT',
                 'EXPECTF',
-                'EXPECTREGEX',
-            ],
+                'EXPECTREGEX'
+            ]
         ];
 
         foreach ($requiredSections as $section) {
@@ -497,11 +463,11 @@ class PhptTestCase implements Test, SelfDescribing
         return \str_replace(
             [
                 '__DIR__',
-                '__FILE__',
+                '__FILE__'
             ],
             [
                 "'" . \dirname($this->filename) . "'",
-                "'" . $this->filename . "'",
+                "'" . $this->filename . "'"
             ],
             $code
         );
@@ -509,12 +475,12 @@ class PhptTestCase implements Test, SelfDescribing
 
     private function getCoverageFiles(): array
     {
-        $baseDir  = \dirname(\realpath($this->filename)) . \DIRECTORY_SEPARATOR;
-        $basename = \basename($this->filename, 'phpt');
+        $baseDir          = \dirname(\realpath($this->filename)) . \DIRECTORY_SEPARATOR;
+        $basename         = \basename($this->filename, 'phpt');
 
         return [
             'coverage' => $baseDir . $basename . 'coverage',
-            'job'      => $baseDir . $basename . 'php',
+            'job'      => $baseDir . $basename . 'php'
         ];
     }
 
@@ -541,10 +507,7 @@ class PhptTestCase implements Test, SelfDescribing
         $globals = '';
 
         if (!empty($GLOBALS['__PHPUNIT_BOOTSTRAP'])) {
-            $globals = '$GLOBALS[\'__PHPUNIT_BOOTSTRAP\'] = ' . \var_export(
-                $GLOBALS['__PHPUNIT_BOOTSTRAP'],
-                true
-            ) . ";\n";
+            $globals = '$GLOBALS[\'__PHPUNIT_BOOTSTRAP\'] = ' . \var_export($GLOBALS['__PHPUNIT_BOOTSTRAP'], true) . ";\n";
         }
 
         $template->setVar(
@@ -553,7 +516,7 @@ class PhptTestCase implements Test, SelfDescribing
                 'phar'             => $phar,
                 'globals'          => $globals,
                 'job'              => $files['job'],
-                'coverageFile'     => $files['coverage'],
+                'coverageFile'     => $files['coverage']
             ]
         );
 

@@ -9,16 +9,6 @@ use Illuminate\Support\Facades\Blade;
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
-
-    /**
      * Bootstrap any application services.
      *
      * @return void
@@ -35,5 +25,15 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('components.comentarios', 'comentarios');
         Blade::component('components.navegarAdmin', 'navAdm');
         Blade::component('components.postagensAdmin', 'gerPostagens');
+    }
+
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
     }
 }

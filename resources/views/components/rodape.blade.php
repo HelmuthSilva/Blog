@@ -10,6 +10,7 @@
 }
 }
 </style>
+  <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
   <div class="row">
   <div class="column">
     <a href="https://globoesporte.globo.com/loja/premiere?utm_source=google&utm_medium=cpc&utm_campaign=brasileirao-2019&utm_content=search-institucional-rlsa-premiere&origemId=932&gclid=Cj0KCQjwzunmBRDsARIsAGrt4mvoczXdUYerJ_aDbc8Ni7_E56NcVABUh_gnfx1pDxegczsak_y8qXEaAg-wEALw_wcB"><img src="https://scontent-gru2-1.xx.fbcdn.net/v/t1.0-9/46663221_2045008128919668_1094817159801995264_n.png?_nc_cat=104&_nc_ht=scontent-gru2-1.xx&oh=e85e2cac5efb288342eeef16d42eda9a&oe=5D5C1673" alt="Forest" style="width:100%"></a>

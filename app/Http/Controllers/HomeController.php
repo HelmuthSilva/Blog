@@ -13,11 +13,11 @@ class HomeController extends Controller
      *
      * @return void
      */
-    
+
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {

@@ -13,12 +13,9 @@ namespace Symfony\Component\Console\Tests\Output;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Formatter\OutputFormatter;
-use Symfony\Component\Console\Helper\QuestionHelper;
-use Symfony\Component\Console\Input\StreamableInputInterface;
 use Symfony\Component\Console\Output\ConsoleSectionOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\StreamOutput;
-use Symfony\Component\Console\Question\Question;
 
 class ConsoleSectionOutputTest extends TestCase
 {
@@ -26,7 +23,7 @@ class ConsoleSectionOutputTest extends TestCase
 
     protected function setUp()
     {
-        $this->stream = fopen('php://memory', 'r+b', false);
+        $this->stream = fopen('php://memory', 'r+', false);
     }
 
     protected function tearDown()
@@ -36,7 +33,7 @@ class ConsoleSectionOutputTest extends TestCase
 
     public function testClearAll()
     {
-        $sections = [];
+        $sections = array();
         $output = new ConsoleSectionOutput($this->stream, $sections, OutputInterface::VERBOSITY_NORMAL, true, new OutputFormatter());
 
         $output->writeln('Foo'.PHP_EOL.'Bar');
@@ -48,7 +45,7 @@ class ConsoleSectionOutputTest extends TestCase
 
     public function testClearNumberOfLines()
     {
-        $sections = [];
+        $sections = array();
         $output = new ConsoleSectionOutput($this->stream, $sections, OutputInterface::VERBOSITY_NORMAL, true, new OutputFormatter());
 
         $output->writeln("Foo\nBar\nBaz\nFooBar");
@@ -61,7 +58,7 @@ class ConsoleSectionOutputTest extends TestCase
     public function testClearNumberOfLinesWithMultipleSections()
     {
         $output = new StreamOutput($this->stream);
-        $sections = [];
+        $sections = array();
         $output1 = new ConsoleSectionOutput($output->getStream(), $sections, OutputInterface::VERBOSITY_NORMAL, true, new OutputFormatter());
         $output2 = new ConsoleSectionOutput($output->getStream(), $sections, OutputInterface::VERBOSITY_NORMAL, true, new OutputFormatter());
 
@@ -78,7 +75,7 @@ class ConsoleSectionOutputTest extends TestCase
     public function testClearPreservingEmptyLines()
     {
         $output = new StreamOutput($this->stream);
-        $sections = [];
+        $sections = array();
         $output1 = new ConsoleSectionOutput($output->getStream(), $sections, OutputInterface::VERBOSITY_NORMAL, true, new OutputFormatter());
         $output2 = new ConsoleSectionOutput($output->getStream(), $sections, OutputInterface::VERBOSITY_NORMAL, true, new OutputFormatter());
 
@@ -93,7 +90,7 @@ class ConsoleSectionOutputTest extends TestCase
 
     public function testOverwrite()
     {
-        $sections = [];
+        $sections = array();
         $output = new ConsoleSectionOutput($this->stream, $sections, OutputInterface::VERBOSITY_NORMAL, true, new OutputFormatter());
 
         $output->writeln('Foo');
@@ -105,7 +102,7 @@ class ConsoleSectionOutputTest extends TestCase
 
     public function testOverwriteMultipleLines()
     {
-        $sections = [];
+        $sections = array();
         $output = new ConsoleSectionOutput($this->stream, $sections, OutputInterface::VERBOSITY_NORMAL, true, new OutputFormatter());
 
         $output->writeln('Foo'.PHP_EOL.'Bar'.PHP_EOL.'Baz');
@@ -117,7 +114,7 @@ class ConsoleSectionOutputTest extends TestCase
 
     public function testAddingMultipleSections()
     {
-        $sections = [];
+        $sections = array();
         $output1 = new ConsoleSectionOutput($this->stream, $sections, OutputInterface::VERBOSITY_NORMAL, true, new OutputFormatter());
         $output2 = new ConsoleSectionOutput($this->stream, $sections, OutputInterface::VERBOSITY_NORMAL, true, new OutputFormatter());
 
@@ -127,7 +124,7 @@ class ConsoleSectionOutputTest extends TestCase
     public function testMultipleSectionsOutput()
     {
         $output = new StreamOutput($this->stream);
-        $sections = [];
+        $sections = array();
         $output1 = new ConsoleSectionOutput($output->getStream(), $sections, OutputInterface::VERBOSITY_NORMAL, true, new OutputFormatter());
         $output2 = new ConsoleSectionOutput($output->getStream(), $sections, OutputInterface::VERBOSITY_NORMAL, true, new OutputFormatter());
 
@@ -139,25 +136,5 @@ class ConsoleSectionOutputTest extends TestCase
 
         rewind($output->getStream());
         $this->assertEquals('Foo'.PHP_EOL.'Bar'.PHP_EOL."\x1b[2A\x1b[0JBar".PHP_EOL."\x1b[1A\x1b[0JBaz".PHP_EOL.'Bar'.PHP_EOL."\x1b[1A\x1b[0JFoobar".PHP_EOL, stream_get_contents($output->getStream()));
-    }
-
-    public function testClearSectionContainingQuestion()
-    {
-        $inputStream = fopen('php://memory', 'r+b', false);
-        fwrite($inputStream, "Batman & Robin\n");
-        rewind($inputStream);
-
-        $input = $this->getMockBuilder(StreamableInputInterface::class)->getMock();
-        $input->expects($this->once())->method('isInteractive')->willReturn(true);
-        $input->expects($this->once())->method('getStream')->willReturn($inputStream);
-
-        $sections = [];
-        $output = new ConsoleSectionOutput($this->stream, $sections, OutputInterface::VERBOSITY_NORMAL, true, new OutputFormatter());
-
-        (new QuestionHelper())->ask($input, $output, new Question('What\'s your favorite super hero?'));
-        $output->clear();
-
-        rewind($output->getStream());
-        $this->assertSame('What\'s your favorite super hero?'.PHP_EOL."\x1b[2A\x1b[0J", stream_get_contents($output->getStream()));
     }
 }
