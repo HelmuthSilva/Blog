@@ -17,6 +17,7 @@ class CreateComentariosTable extends Migration
             $table->integer('id')->autoIncrement();
             $table->longText('texto_comentario');
             $table->string('nome_usuario');
+            $table->string('imagem');
             $table->integer('postagem');
             $table->foreign('postagem')->references('id')->on('postagens');
             $table->timestamps();

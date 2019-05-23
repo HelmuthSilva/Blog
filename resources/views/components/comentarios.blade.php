@@ -1,12 +1,13 @@
-<div class="container">
+<div class="container-fluid">
 <div class="col-lg-8 col-md-10 mx-auto">
-<div class="card" style="width: 18rem;">
+<div class="card" style="width: 38rem; height: auto">
   <div class="card-body">
     <!--<h5 class="card-title">Comentários</h5> -->
     <h6 class="card-subtitle mb-2 text-muted">{{$nome}} em {{$hr}}</h6>
-        <p class="card-text">
-            {{$comentario}}
-        </p>
+        <img class="card-img-top" src="/storage/{{$imagem}}">
+        <div class="card-body">
+        <p class="card-text">{{$comentario}}</p>
+        </div>
 
     <div type="hidden" value="{{$autorPub}}"></div>
     <div type="hidden" value="{{$autP}}"></div>

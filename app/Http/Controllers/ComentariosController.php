@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
 use Illuminate\Support\Facades\DB;
 use App\Comentarios;
 use App\Postagens;
@@ -40,6 +42,12 @@ class ComentariosController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->file('imagem')==null){
+            $caminho = "";
+        }else{
+            $caminho = $request->file('imagem')->store('imagens','public');
+        }
+
         $comentarios = new Comentarios();
         $val = $request->input('postagem');
         $postagens = Postagens::find($val);
@@ -51,6 +59,7 @@ class ComentariosController extends Controller
 
         $comentarios->texto_comentario = $request->input('comentario');
         $comentarios->nome_usuario=Auth::user()->name;
+        $comentarios->imagem = $caminho;
         $comentarios->postagem = $request->input('postagem');
         $comentarios->save();
 
@@ -105,6 +114,8 @@ class ComentariosController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $caminho = $request->file('imagem')->store('imagens','public');
+
         $comentarios = Comentarios::find($id);
         $val = $request->input('postagem');
         $postagens = Postagens::find($val);
@@ -113,6 +124,7 @@ class ComentariosController extends Controller
         if(isset($comentarios)){
         $comentarios->nome_usuario= $request->input('nome_usuario');
         $comentarios->postagem= $request->input('postagem');
+        $comentarios->imagem = $caminho;
         $comentarios->texto_comentario = $request->input('comentario');
         $comentarios->save();
         }

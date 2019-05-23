@@ -54,6 +54,10 @@
         {{$com->texto_comentario}}
     @endslot
 
+    @slot('imagem')
+        {{$com->imagem}}
+    @endslot
+
     @slot('id')
         {{$com->id}}
     @endslot
