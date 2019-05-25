@@ -1,4 +1,5 @@
 <?php
+use App\Mail\TestEmail;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,3 +63,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/testmail', function () {
+    $data = ['message' => 'Testando essa merda!'];
+
+    Mail::to('helmuthmartines@hotmail.com')->send(new TestEmail($data));
+    return redirect('/');
+})->name('testmail');
+
+
+

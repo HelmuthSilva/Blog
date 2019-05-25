@@ -29,6 +29,7 @@ return array(
     'Symfony\\Component\\CssSelector\\' => array($vendorDir . '/symfony/css-selector'),
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'Spatie\\Macroable\\' => array($vendorDir . '/spatie/macroable/src'),
+    'Sichikawa\\LaravelSendgridDriver\\' => array($vendorDir . '/s-ichikawa/laravel-sendgrid-driver/src'),
     'React\\Stream\\' => array($vendorDir . '/react/stream/src'),
     'React\\Socket\\' => array($vendorDir . '/react/socket/src'),
     'React\\Promise\\Timer\\' => array($vendorDir . '/react/promise-timer/src'),
