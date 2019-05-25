@@ -27,4 +27,9 @@ class HomeController extends Controller
         ->get();
         return view('index',compact('postagens'));
     }
+
+    public function mensagem(){
+        return view('enviarMensagem');
+    }
+
 }
