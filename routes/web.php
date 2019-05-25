@@ -62,6 +62,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
+Route::get('/mensagem', 'HomeController@mensagem');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/testmail', function () {

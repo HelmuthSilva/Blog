@@ -2,7 +2,10 @@
 
 @section('conteudo')
 
-<form class="container" action="#" method="POST">
+@navegar()
+
+@endnavegar
+<form class="container" action="#" method="#">
 @csrf
     <label for="Para"> Para: </label>
     <div class="form-group">
@@ -11,6 +14,7 @@
 
     <div class="form-group">
     <label for="mensagem"> Mensagem: </label>
+    <br>
         <textarea name="mensagem" row="3" col="3">
         </textarea>
     </div>
@@ -22,5 +26,9 @@
     <div>
 
 </form>
+
+@rodape()
+
+@endrodape
 
 @endsection

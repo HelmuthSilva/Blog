@@ -4,7 +4,6 @@
 <!-- Barra de navegação -->
 @navegar()
 
-
 @endnavegar
 <!-- -->
 
