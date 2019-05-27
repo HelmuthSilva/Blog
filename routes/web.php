@@ -69,9 +69,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/testmail', function () {
     $data = ['message' => 'Testando essa merda!'];
 
-    Mail::to('helmuthmartines@hotmail.com')->send(new TestEmail($data));
+    Mail::to('gabriel.jg04@gmail.com')->send(new TestEmail($data));
     return redirect('/');
 })->name('testmail');
+
+Route::post('/mensagem', 'MailController@enviarEmail');
 
 
 
