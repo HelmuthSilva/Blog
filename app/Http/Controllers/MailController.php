@@ -18,7 +18,18 @@ class MailController extends Controller
         $remetente = Auth::user()->email;
         $nome = Auth::user()->name;
 
-        Mail::to($destinatario)->send(new TestEmail($remetente, $nome, $assunto, $destinatario, $mensagem));
-        return back()->with('sucesso', 'Mensagem enviada com sucesso!');       
+        //Mail::to($destinatario)->send(new TestEmail($remetente, $nome, $assunto, $destinatario, $mensagem));
+        //return back()->with('sucesso', 'Mensagem enviada com sucesso!');       
+
+        if(User::where('users.name', '=', $destinatario)->exists()){
+            $destino = DB::table('users')
+            ->select('users.email')
+            ->where('users.name', $destinatario)
+            ->get();
+            Mail::to($destino)->send(new TestEmail($remetente, $nome, $assunto, $destino, $mensagem));
+            return back()->with('sucesso', 'Mensagem enviada com sucesso!');
+        }else{
+            return back()->with('erro', 'Usuário não existe!');
+        }
     }
 }
