@@ -4,7 +4,9 @@
   <div class="card-body">
     <!--<h5 class="card-title">Comentários</h5> -->
     <h6 class="card-subtitle mb-2 text-muted">{{$nome}} em {{$hr}}</h6>
-        <img class="card-img-top" src="/storage/{{$imagem}}">
+    @if($imagem!="")
+            <img class="card-img-top" src="/storage/{{$imagem}}">
+    @endif
         <div class="card-body">
         <p class="card-text">{{$comentario}}</p>
         </div>

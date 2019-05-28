@@ -6,6 +6,13 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
 
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/galeria" style="font-size: 20px">Galeria</a>
+          </li>
+        </ul>
+
+
         @if (Route::has('login'))
         <ul class="navbar-nav ml-auto">
           @auth

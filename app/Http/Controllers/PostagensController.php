@@ -19,6 +19,12 @@ class PostagensController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function galeria(){
+        $postagens = Postagens::all();
+        return view('galeria', compact('postagens'));
+    }
+
     public function exibirTodas(){
         $postagens = Postagens::all();
         return view('index', compact('postagens'));

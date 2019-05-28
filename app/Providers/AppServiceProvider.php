@@ -25,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('components.comentarios', 'comentarios');
         Blade::component('components.navegarAdmin', 'navAdm');
         Blade::component('components.postagensAdmin', 'gerPostagens');
+        Blade::component('components.galeriaCom', 'galeria');
     }
 
     /**

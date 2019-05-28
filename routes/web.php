@@ -12,6 +12,8 @@ use App\Mail\TestEmail;
 |
 */
 
+Route::get('/galeria', 'PostagensController@galeria');
+
 Route::get('/publicar', function(){
     return view('publicar');
 });
