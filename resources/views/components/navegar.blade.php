@@ -6,16 +6,14 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
 
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/galeria" style="font-size: 20px">Galeria</a>
-          </li>
-        </ul>
-
-
         @if (Route::has('login'))
         <ul class="navbar-nav ml-auto">
           @auth
+
+          <li class="nav-item">
+            <a class="nav-link" href="/" style="font-size: 20px">Home</a>
+          </li>
+
           <li class="nav-item">
             <a class="nav-link" href="/publicar" style="font-size: 20px">Publicar</a>
           </li>

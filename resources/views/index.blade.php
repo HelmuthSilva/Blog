@@ -16,29 +16,28 @@
 
 
 <!-- Postagens -->
-@foreach ($postagens as $pubs)
-@postagens()
+<div class="album py-5 bg-light">
+        <div class="container">
+          <div class="row">
+@foreach($postagens as $posts)
+    @galeria()
+        @slot('imagemPost')
+            {{$posts->id}}
+        @endslot
+
         @slot('titulo')
-            {{$pubs['nomePost']}}
+          {{$posts->nomePost}}
         @endslot
 
-        @slot('descricao')
-            {{$pubs['descricao']}}
+        @slot('imagem')
+            {{$posts->imagem}}
         @endslot
 
-        @slot('nome')
-            {{$pubs['nome']}}
-        @endslot
-
-        @slot('dia')
-            {{$pubs['created_at']}}
-        @endslot
-
-        @slot('id')
-            {{$pubs['id']}}
-        @endslot        
-    @endpostagens
+    @endgaleria
 @endforeach
+            </div>
+        </div>
+    </div>
 <div class="container">
         <div class="post-preview">
           <a href="post.html">

@@ -4,6 +4,8 @@
             <a href="/ver_post/{{$imagemPost}}">
                 <img class="card-img-top" src="/storage/{{$imagem}}">
             </a>
+            <center><h5>{{$titulo}}</h5></center>
+
         </div>
     </div>
 </div>
